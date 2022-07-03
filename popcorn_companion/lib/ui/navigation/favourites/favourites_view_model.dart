@@ -27,6 +27,7 @@ class FavouritesViewModel extends BaseViewModel {
 
   getFavourites() {
     favourites = ref.watch(favouriteShowBoxProvider(box)).getAllFavourites();
+    favourites.sort((a, b) => a.name.toString().compareTo(b.name.toString())); //Sort alphabetically
     notifyListeners();
   }
 

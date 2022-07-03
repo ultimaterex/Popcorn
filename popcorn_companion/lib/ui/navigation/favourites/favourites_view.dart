@@ -44,12 +44,14 @@ class FavouritesViewState extends ConsumerState<FavouritesView> with PostFrameMi
                 ),
               ),
               viewModel.favourites.isEmpty
-                  ? Center(
-                      child: Text(
-                      Strings.noFavourites,
-                      textAlign: TextAlign.center,
-                      style: theme.textTheme.bodyLarge,
-                    ))
+                  ? Expanded(
+                    child: Center(
+                        child: Text(
+                        Strings.noFavourites,
+                        textAlign: TextAlign.center,
+                        style: theme.textTheme.bodyLarge,
+                      )),
+                  )
                   : Expanded(
                       child: ListView.builder(
                           itemCount: viewModel.favourites.length,

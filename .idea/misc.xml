@@ -3,4 +3,11 @@
   <component name="ProjectRootManager">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
+  <component name="SuppressABINotification">
+    <option name="modulesWithSuppressedNotConfigured">
+      <set>
+        <option value="popcorn_companion_android" />
+      </set>
+    </option>
+  </component>
 </project>
