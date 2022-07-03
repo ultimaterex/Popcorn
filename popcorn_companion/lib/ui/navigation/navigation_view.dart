@@ -1,20 +1,28 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:popcorn_companion/ui/navigation/navigation_view_model.dart';
 
 final navigationProvider = ChangeNotifierProvider<NavigationViewModel>((ref) => NavigationViewModel());
 
-class NavigationView extends ConsumerWidget {
+class NavigationView extends ConsumerStatefulWidget {
   const NavigationView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  NavigationViewState createState() => NavigationViewState();
+}
+
+class NavigationViewState extends ConsumerState<NavigationView> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true; //Declared as true as to not wipe view state
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
     final viewModel = ref.watch(navigationProvider);
 
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       body: PageTransitionSwitcher(
         transitionBuilder: (child, primaryAnimation, secondaryAnimation) => SharedAxisTransition(
           animation: primaryAnimation,
@@ -30,16 +38,14 @@ class NavigationView extends ConsumerWidget {
 
   Widget navigation(NavigationViewModel vm) => BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
-        backgroundColor: Colors.black38,
-        unselectedItemColor: Colors.white60,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         currentIndex: vm.currentIndex,
         onTap: (index) => vm.onNavigation(index),
         items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(icon: Icon(Icons.movie), label: 'Explore Shows'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Explore People'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'People'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Favourites'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
         ],

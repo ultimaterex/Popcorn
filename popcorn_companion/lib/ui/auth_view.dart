@@ -9,7 +9,7 @@ class AuthView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: implement build
+    // TODO: build for Authentication View
     throw UnimplementedError();
   }
 
